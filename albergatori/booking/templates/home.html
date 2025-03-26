@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+    <head>
+        <title> Home </title>
+        <!-- Inclusione bootstrap  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Inclusione dei file css -->
+        <link rel="stylesheet" href="{% static "css/generale.css" %}">
+        <link rel="stylesheet" href="{% static "css/card.css" %}">
+        <!-- Inclusione swiper -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <script type="module" src="{% static 'js/moduloSwiper.js' %}"></script>
+    </head>
+
+    <body>
+
+        <!-- Contenitore per sistemare tutti gli elementi della pagina  -->
+        <div class="wrapper">
+
+            <!-- se l'utente ha come valore cliente allora si visualizza la pagina lato cliente -->
+            {% if not user.isAlbergatore %}
+
+                <!-- Inclusione header -->
+                {% include "headerCliente.html" %}  
+
+                <main>
+
+                    <!-- visualizzazione dei messaggi di conferma e/o di errore -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <div class="scatola">
+                                        {{ message }}
+                                        <a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %} 
+                    {% endif %}
+                    
+                    <h2>Le tue prenotazioni attive</h2>
+
+                    <!-- Per visualizzare le prenotazioni attive -->
+                    {% if prenotazioni_attive %}
+                        {% include 'swiper.html' with cardList=prenotazioni_attive tipo_card='prenotazione' %}
+                    {% else %}
+                        <p>Non hai alcuna prenotazione attiva</p>
+                    {% endif %}
+
+                </main>
+                
+            <!-- se invece l'utente ha come valore albergatore allora si visualizza la pagina lato albergatore -->
+            {% elif user.isAlbergatore %}
+
+                <!-- Inclusione header -->
+                {% include "headerAlbergatore.html" %}
+
+                <main>
+                    <h2>Prenotazioni recenti</h2>
+                    <!-- Per visualizzare le prenotazioni attive -->
+                    {% if prenotazioni %}
+                        {% include 'swiper.html' with cardList=prenotazioni tipo_card='prenotazione' %}
+                    {% else %}
+                        <p>Non hai alcuna prenotazione attiva</p>
+                    {% endif %}
+                </main>
+            {% endif %}
+
+            <!-- Inclusione del footer -->
+            {% include "footer.html" %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>

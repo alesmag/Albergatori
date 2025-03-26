@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+    <head>
+        <title> Login </title>
+        <!-- Inclusione dei file css  -->
+        <link rel="stylesheet" href="{% static "css/generale.css" %}">
+        <link rel="stylesheet" href="{% static "css/forms.css" %}">
+    </head>
+
+    <body>
+        <!-- Contenitore per sistemare tutti gli elementi della pagina  -->
+        <div class="wrapper">
+
+            <main>
+
+                <div class="form-container">
+
+                    <div class="form-box">
+
+                        <h2> Login Cliente </h2>
+
+                        <!-- visualizzazione di possibili errori -->
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                {% for field in loginFormCliente %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in loginFormCliente.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <form method="POST" name="formCliente">
+                            <!-- token di sicurezza di django -->
+                            {% csrf_token %}
+
+                            <!-- form di login cliente dinamico -->
+                            {{ loginFormCliente.as_p }}
+                            <button type="submit" name="buttonCliente">Login</button>
+                        </form>
+
+                        <a href="{% url "registerCliente" %}">Registrazione cliente</a>
+                        <a href="{% url "passwordDimenticata" %}">Password dimenticata?</a>
+                    </div>
+
+                    <div class="form-box">
+
+                        <h2> Login Albergatore </h2>
+                        <!-- visualizzazione di possibili errori -->
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                {% for field in loginFormAlbergatore %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in loginFormAlbergatore.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <form method="POST" name="formAlbergatore">
+                            <!-- token di sicurezza di django -->
+                            {% csrf_token %}
+
+                            <!-- form di login albergatore dinamico -->
+                            {{ loginFormAlbergatore.as_p }}
+                            <button type="submit" name="buttonAlbergatore">Login</button>
+                        </form>
+
+                        <a href="{% url "registerAlbergatore" %}">Registrazione albergatore</a>
+                        <a href="{% url "passwordDimenticata" %}">Password dimenticata?</a>
+
+                    </div>
+                    
+                </div>
+
+            </main>
+
+            <!-- Inclusione del footer  -->
+            {% include "footer.html" %}
+        </div>
+    </body>
+</html>

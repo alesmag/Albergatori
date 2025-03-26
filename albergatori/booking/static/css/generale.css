@@ -1,0 +1,128 @@
+/* Regole generali comuni a diverse pagine  */
+
+/* Import del font Poppins dal sito di google*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Poppins, sans-serif;
+}
+
+/* Stile globale per body e html per far occupare tutta l'altezza della pagina */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 2% 2%;
+    flex: 1; /* Si espande per occupare tutto lo spazio */
+}
+
+/* Regola wrapper che contiene tutti gli elementi della pagina */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Regola per l'h2 di ogni pagina  */
+h2 {
+    font-weight: bold;
+}
+
+/* CSS della navbar */
+
+/* Posiziona gli elementi dell'header (img, nav, button) a distanza pari al centro 
+   (justify-content:space-between). La navbar conta come singolo elemento */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    background-color: darkblue;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Cambia il puntatore quando si passa sopra il logo*/
+.logo {
+    cursor: pointer;
+}
+
+/* Font dei link alle altre pagine ed elimino i bullet della <ul> */
+.nav-links {
+    font-size: 16px;
+    font-weight: 500;
+    list-style: none;
+}
+
+/* Metto i link in linea */
+
+.nav-links li {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+.nav-links a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    background-color: #52a0e0;
+    color: white;
+    border-radius: 10px;
+}
+
+/* Regole per il pulsante di logout*/
+
+.logout-button {
+    height: 50px;
+    width: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    background-color: #52a0e0;
+    border-radius: 10px;
+}
+
+.logout-button:hover,
+.logout-button:active {
+    cursor: pointer;
+    padding: 1px;
+    outline: 2px solid white;
+    border: 2px solid darkblue;
+}
+
+/* Regole per il footer */
+
+footer {
+    background-color: #f2f2f2;
+    color: black;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+footer li {
+    padding-left: 5px;
+}
+
+footer p {
+    text-align: center;
+    margin-bottom: 5px;
+}

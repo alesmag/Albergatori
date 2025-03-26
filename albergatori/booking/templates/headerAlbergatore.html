@@ -1,0 +1,18 @@
+<!-- Codice html per l'header dell'albergatore  -->
+
+{% load static %}
+
+<header>
+    <a href="{% url "home" %}"><img class="logo" src="{% static "media/logo.png" %}" 
+        width=100px height=80px alt="logo"></a>
+        
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url "home" %}">Home</a></li>
+            <li><a href="{% url "camereAlbergatore" %}">Le mie camere</a></li>
+            <li><a href="{% url "gestisciPrenotazioni" %}">Gestisci prenotazioni</a></li>
+            <li><a href="{% url "storicoPrenotazioni" %}">Storico prenotazioni</a></li>
+        </ul>
+    </nav>  
+    <a href="{% url "logout" %}"><button class="logout-button">Logout</button></a>
+</header>

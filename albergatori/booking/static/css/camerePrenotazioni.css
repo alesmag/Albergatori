@@ -1,0 +1,56 @@
+/* Layout di camereAlbergatore e di gestisciPrenotazioni  */
+
+/* Nasconde di default gli elementi con la classe .hidden */
+.hidden {
+    display: none;
+}
+
+/* Regole per i messaggi di errore e per i bottoni di aggiunta  */
+
+.contenitore {
+    height: auto;
+    width: 50%;
+}
+
+.btn {
+    margin-top: 2px;
+    background-color: darkblue;
+    font-size: large;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #52a0e0;
+    color: white;
+}
+
+/* Regole per scorrere le camere  */
+
+.swiper-wrapper {
+    display: flex;
+    justify-content: left;
+    padding: 15px;
+}
+
+/* Regole per i messaggi di errore e sucesso */
+
+.scatola {
+    display: flex;
+    justify-content: space-between;
+}
+
+.scatola a {
+    font-size: 20px;
+    text-decoration: none;
+}
+
+/* Regole per i bottoni di cancellazione  */
+
+.cancella-albergo {
+    display: flex;
+    margin-top: 50px;
+}
+
+.cancella-albergo h2 {
+    margin-right: 50px;
+} 

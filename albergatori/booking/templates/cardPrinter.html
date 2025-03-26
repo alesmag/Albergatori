@@ -1,0 +1,101 @@
+{% load static %}
+{% load custom_tags %}
+
+<!-- Card di una prenotazione attiva/passata -->
+{% if  tipo_card == 'prenotazione' %}
+
+<div class="card">
+    {% if card.camera.immagine %}
+        <img src="{{ card.camera.immagine.url }}" class="card-img-top img-thumbnail" alt="Prenotazione">
+    {% else %}
+        <img src="{% static "media/cameradefault.png" %}" class="card-img-top img-thumbnail" alt="Prenotazione">
+    {% endif %}
+
+    <div class="card-body">
+        <h5 class="card-title">Camera {{ card.camera.numeroCamera }}</h5>
+        {% if request.user.isAlbergatore %}
+            <p class="card-text host">Cliente: {{ card.cliente }}</p>
+        {% else %}
+            <p class="card-text host">Albergatore: {{ card.camera.albergo.albergatore }}</p>
+        {% endif %}
+        <p class="card-text">
+            Albergo: {{ card.camera.albergo.nome }}<br>
+            Tipo camera: {{ card.camera.tipologia }}<br>
+            Persone presenti: {{ card.numPersone }} <br>
+            Effettuata il: {{ card.dataPrenotazione }}<br>
+            Inizio soggiorno: {{ card.dataInizio }}<br>
+            Fine soggiorno: {{ card.dataFine }}<br>
+            Annullabile entro il: {{ card.dataCancellazione }}<br>
+            <div class="container-prezzo">
+                <p class="prezzo"> Totale: {{ card.totale }}€
+            </div>
+
+        {% if request.path == "/booking/gestisciPrenotazioni/" or request.path == "/booking/prenotazioniCliente/" %}
+            {% if annullabile %}
+                <form method="post" action="{% url 'annullaPrenotazione' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="prenotazione_id" value="{{ card.id }}">
+                    <button type="submit" class="btn btn-primary">Annulla prenotazione</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Card di una camera -->
+{% elif tipo_card == 'camera' %} 
+
+<div class="card">
+
+    {% if card.immagine.url is not None %}
+        <img src="{{ card.immagine.url }}" class="card-img-top img-thumbnail" alt="Prenotazione">
+    {% else %}
+        <img src="{% static "media/cameradefault.png" %}" class="card-img-top img-thumbnail" alt="Prenotazione">
+    {% endif %}
+    
+    <div class="card-body">
+        <h5 class="card-title">Camera {{ card.numeroCamera }}</h5>
+        {% if not request.user.isAlbergatore %}
+            <p class="card-text host">Albergatore: {{ card.albergo.albergatore }}</p>
+        {% endif %}
+        <p class="card-text">Tipo camera: {{ card.tipologia }}</p>
+        <p class="card-text">
+            Albergo: {{ card.albergo.nome }}<br>
+
+            {% while_tag card.albergo.numStelle as range_limit %}
+            {% for stella in range_limit %}
+                <span class="fa fa-star checked"></span>                                        
+            {% endfor%}
+        </p>
+        <p class="card-text">Descrizione: {{ card.descrizione }} </p>
+        <div class="container-prezzo">
+            <p class="prezzo">{{card.prezzo}}€</p>
+            <p>/notte</p>
+        </div>
+        <p class="card-text">Tempo di cancellazione: {{ card.tempoCancellazione }} gg</p>
+
+        {% if request.path == "/booking/ricercaPrenotazione/" %}
+            <form method="POST" action="{% url "prenota" %}">
+                {% csrf_token %}
+                <input type="hidden" name="camera_id" value="{{ card.id }}">
+                <input type="hidden" name="dataInizio" value="{{ dataInizio | date:"Y-m-d" }}">
+                <input type="hidden" name="dataFine" value="{{ dataFine | date:"Y-m-d" }}">
+                <input type="hidden" name="numeroPersone" value="{{ numeroPersone }}">
+                
+                <button class="tasto-prenota" type="submit" name="bottonePrenota">Prenota</button>
+            </form>
+        {% endif %}
+
+        {% if request.path == "/booking/camereAlbergatore/" %}
+        <form method="post" action="{% url 'cancellaCamera' %}">
+            {% csrf_token %}
+            <input type="hidden" name="camera_id" value="{{ card.id }}">
+            <button type="submit" class="btn btn-primary">Cancella camera</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% endif %} 
+
+

@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+    <head>
+        <title> Gestisci Prenotazioni </title>
+        <!-- Inclusione bootstrap  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Inclusione dei file css -->
+        <link rel="stylesheet" href="{% static "css/generale.css" %}">
+        <link rel="stylesheet" href="{% static "css/card.css" %}">
+        <link rel="stylesheet" href="{% static "css/camerePrenotazioni.css" %}">
+        <!-- Inclusione swiper -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <script type="module" src="{% static 'js/moduloSwiper.js' %}"></script>
+    </head>
+
+    <body>
+
+        <!-- Contenitore per sistemare tutti gli elementi della pagina  -->
+        <div class="wrapper">
+
+            <!-- Inclusione dell'header -->
+            {% include "headerAlbergatore.html" %}  
+
+            <main>
+                <!-- visualizzazione dei messaggi di conferma e/o di errore -->
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <div class="scatola">
+                                    {{ message }}
+                                    <a href="{% url 'gestisciPrenotazioni' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %} 
+                {% endif %}
+
+                <h2>Prenotazioni attive annullabili</h2>
+
+                <!-- Per visualizzare le prenotazioni attive -->
+                {% if prenotazioni_attive %}
+                    {% include 'swiper.html' with cardList=prenotazioni_attive tipo_card='prenotazione' annullabile=True%}
+                {% else %}
+                    <p>Non hai alcuna prenotazione attiva</p>   
+                {% endif %}
+                
+            </main>
+
+            <!-- Inclusione del footer  -->
+            {% include "footer.html" %}
+
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>

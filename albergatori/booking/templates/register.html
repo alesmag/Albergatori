@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+    <head>
+        <title> Registrazione {{ actor }} </title>
+        <!-- Inclusione dei file css  -->
+        <link rel="stylesheet" href="{% static "css/generale.css" %}">
+        <link rel="stylesheet" href="{% static "css/registrazione.css" %}">
+    </head>
+
+    <body>
+
+        <div class="form-container">
+
+            <h2> Registrazione {{ actor }}</h2>
+
+            <form method="POST">
+                <!-- token di sicurezza di django -->
+                {% csrf_token %}
+
+                <!-- actor viene preso dalla view context -->
+                <!-- se actor ha come valore cliente allora si parla della registrazione lato cliente -->
+                {% if actor == "Cliente" %}
+
+                    <!-- form di registrazione dinamico cliente con campi incapsulati in paragrafi (as_p) -->
+                    {{ registerFormCliente.as_p }}
+                
+                <!-- se invece actor ha come valore albergatore allora si parla di registrazione lato albergatore -->
+                {% elif actor == "Albergatore" %}
+
+                    <!-- form di registrazione dinamico albergatore con campi incapsulati in paragrafi (as_p) -->
+                    {{ registerFormAlbergatore.as_p }}
+                {% endif %}
+                <button name="regButton" type="submit">Registrati</button>
+            </form>
+        </div>
+
+        <!-- Inclusione del footer  -->
+        {% include "footer.html" %}
+        
+    </body>
+</html>

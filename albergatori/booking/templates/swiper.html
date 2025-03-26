@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="swiper">
+    <!-- Wrapper aggiuntivo necessario -->
+    <div class="swiper-wrapper">
+        {% for card in cardList %}
+            <div class="swiper-slide">
+                {% include 'cardPrinter.html' with card=card tipo_card=tipo_card %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Paginazione del delle prenotazioni -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- Bottoni per scorrere le prenotazioni quando sono tante -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aggiungi Camera</title>
+        <!-- Link al file CSS di Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <!-- Link ai file css -->
+        <link rel="stylesheet" href="{% static "css/generale.css" %}">
+    </head>
+    <body>     
+        <!-- Contenitore per sistemare tutti gli elementi della pagina  -->
+        <div class="wrapper">
+            
+            <!-- Inclusione dell'header -->
+            {% include "headerAlbergatore.html" %}
+
+            <main>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="card-title">Aggiungi Camera</h1>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button name="buttonAggiungiCamera" type="submit" class="btn btn-primary btn-lg btn-darkblue">Aggiungi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Inclusione del footer -->
+            {% include "footer.html" %}
+        </div>
+    </body>
+</html>

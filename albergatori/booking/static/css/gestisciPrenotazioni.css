@@ -1,0 +1,22 @@
+/* Nasconde di default gli elementi con la classe .hidden */
+.hidden {
+    display: none;
+}
+
+/* Regole per i messaggi di errore e per i bottoni di aggiunta  */
+.contenitore {
+    height: auto;
+    width: 50%;
+}
+
+.btn {
+    margin-top: 2px;
+    background-color: darkblue;
+    font-size: large;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #52a0e0;
+    color: white;
+}

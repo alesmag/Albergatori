@@ -1,0 +1,99 @@
+/* Regole che riguardano le pagine di login, aggiunta della camera, aggiunta dell'albergo e password Dimenticata  */
+
+/* Import del font Poppins dal sito di google*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* CSS dei form e del form-container */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-box {
+    margin: 5%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.form-container h2,h1 {
+    text-align: center;
+    color: blue;
+}
+
+/* CSS del link al form di registrazione */
+
+.form-box a {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: blue;
+}
+
+.form-box a:hover {
+    text-decoration: underline;
+}
+
+.form-box>form {
+    margin-top: 10%;
+    text-align: left;
+}
+
+/* CSS dei campi di input dei form di login */
+
+.form-box input {
+    height: 50px;
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-box input:focus {
+    outline: none;
+    border: 2px solid orange;
+    transition: 1.0 ease-in-out;
+}
+
+.form-container button {
+    text-align: center;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 100%;
+    background-color: blue;
+    color: white;
+    margin-top: 60px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Comportamento del bottone quando ci passi sopra*/
+
+.form-container button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+/* Messaggio che viene visualizzato per l'utente che cerca di recuperare la propria password (valido solo per la pagina di login) */
+
+.recupero {
+    display: none; 
+    color: green; 
+    font-weight: bold;
+}
